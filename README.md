@@ -107,6 +107,8 @@ MATOMO_PORT=8082
 
 `APP_URL` is what the URLs in that file are built from, so the application is reached on `http://localhost:8000/` and everywhere the documentation below says `http://localhost/` you read that instead. Alternatively, allow the low ports on the host once with `sudo sysctl net.ipv4.ip_unprivileged_port_start=80` (persist it in `/etc/sysctl.d/`) and leave the ports as they are.
 
+Some of the folders (`assets`, `data`, `public`, `var`, `vendor`) should be writeable for the user inside the docker container (`uid=1000`). With the default config (your line in `/etc/subuid` looks like `[your username]:100000:65536`), root maps to your UID, uid=1 maps to 100000, ..., uid=1000 (nonroot) maps to 100999. Example to change: `sudo chown -R 100999:1000 assets data public var vendor`
+
 ### Installation
 To set up radix locally, follow these steps:
 
